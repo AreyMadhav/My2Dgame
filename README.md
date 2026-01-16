@@ -35,7 +35,8 @@ If your `java` runtime is older than 17, either install JDK 17 or change `pom.xm
 - **Planned:** Add sprites, animations, collision detection, tilemap support, and sound. I can add a sample sprite and wire it into the resources if you want.
 
 ## **If something breaks**
-- Paste the mvn output or the console stack trace here and I will diagnose further.
+- then idk if i will fix it or not lmfao
 
 ---
 Updated: January 16, 2026 — applied game loop and input fixes; next: assets.
+

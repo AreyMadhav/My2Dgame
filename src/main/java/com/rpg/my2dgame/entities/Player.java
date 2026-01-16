@@ -1,5 +1,6 @@
 package com.rpg.my2dgame.entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -9,22 +10,44 @@ public class Player {
     private int x, y;
     private int width = 32;
     private int height = 32;
+    private int speed = 4;
     private Image sprite;
 
     public Player(int x, int y) {
         this.x = x;
         this.y = y;
-        // Load player sprite
-        ImageIcon icon = new ImageIcon("path_to_your_sprite_image.png");
-        sprite = icon.getImage();
+        // Try loading player sprite from resources; if missing, fallback to a rectangle
+        try {
+            java.net.URL url = getClass().getResource("/com/rpg/my2dgame/resources/player.png");
+            if (url != null) {
+                ImageIcon icon = new ImageIcon(url);
+                sprite = icon.getImage();
+            } else {
+                sprite = null;
+            }
+        } catch (Exception e) {
+            sprite = null;
+        }
     }
 
     public void tick() {
-        // Update player state
+        // reserved for future state updates
+    }
+
+    public void move(boolean up, boolean down, boolean left, boolean right) {
+        if (up) y -= speed;
+        if (down) y += speed;
+        if (left) x -= speed;
+        if (right) x += speed;
     }
 
     public void render(Graphics g) {
-        g.drawImage(sprite, x, y, width, height, null);
+        if (sprite != null && sprite.getWidth(null) > 0) {
+            g.drawImage(sprite, x, y, width, height, null);
+        } else {
+            g.setColor(Color.WHITE);
+            g.fillRect(x, y, width, height);
+        }
     }
 
     public Rectangle getBounds() {
